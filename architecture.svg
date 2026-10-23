@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" font-family="Inter, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="pillar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="deny" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f87171"/>
+      <stop offset="1" stop-color="#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="ok" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4ade80"/>
+      <stop offset="1" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1100" height="640" rx="16" fill="url(#bg)"/>
+
+  <text x="550" y="48" text-anchor="middle" fill="#f8fafc" font-size="30" font-weight="800">Zero Trust Architecture</text>
+  <text x="550" y="74" text-anchor="middle" fill="#94a3b8" font-size="15">"Never trust, always verify" — every request is evaluated</text>
+
+  <!-- Requestor column -->
+  <text x="120" y="120" text-anchor="middle" fill="#64748b" font-size="13" font-weight="700" letter-spacing="2">REQUESTOR</text>
+  <rect x="30" y="140" width="180" height="90" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="120" y="172" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="700">👤 User / Service</text>
+  <text x="120" y="196" text-anchor="middle" fill="#94a3b8" font-size="12">SSO + MFA (FIDO2)</text>
+  <rect x="30" y="245" width="180" height="90" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="120" y="277" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="700">💻 Device</text>
+  <text x="120" y="301" text-anchor="middle" fill="#94a3b8" font-size="12">Cert + patched + EDR</text>
+
+  <!-- arrows to policy engine -->
+  <path d="M210 185 L330 240" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M210 290 L330 270" stroke="#38bdf8" stroke-width="2" marker-end="url(#arr)"/>
+  <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#38bdf8"/></marker></defs>
+
+  <!-- Policy engine -->
+  <text x="470" y="120" text-anchor="middle" fill="#64748b" font-size="13" font-weight="700" letter-spacing="2">POLICY ENGINE</text>
+  <rect x="340" y="140" width="260" height="195" rx="14" fill="url(#pillar)" opacity="0.95"/>
+  <text x="470" y="172" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="800">⚖️ Policy Decision Point</text>
+  <text x="470" y="200" text-anchor="middle" fill="#e0f2fe" font-size="12.5">Identity (IdP / SPIFFE)</text>
+  <text x="470" y="222" text-anchor="middle" fill="#e0f2fe" font-size="12.5">Device posture signal</text>
+  <text x="470" y="244" text-anchor="middle" fill="#e0f2fe" font-size="12.5">Least-privilege policy</text>
+  <text x="470" y="266" text-anchor="middle" fill="#e0f2fe" font-size="12.5">Risk score / context</text>
+  <rect x="360" y="286" width="220" height="32" rx="8" fill="#0f172a" opacity="0.55"/>
+  <text x="470" y="307" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">ALLOW? → short-lived token</text>
+
+  <!-- arrows to data plane -->
+  <path d="M600 220 L700 190" stroke="url(#ok)" stroke-width="2.5" marker-end="url(#arr2)"/>
+  <path d="M600 260 L700 300" stroke="url(#ok)" stroke-width="2.5" marker-end="url(#arr2)"/>
+  <defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4ade80"/></marker></defs>
+
+  <!-- Data plane segments -->
+  <text x="880" y="120" text-anchor="middle" fill="#64748b" font-size="13" font-weight="700" letter-spacing="2">MICRO-SEGMENTED DATA PLANE</text>
+  <rect x="710" y="140" width="340" height="110" rx="12" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+  <text x="880" y="168" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="700">🔐 Segment A — Payments</text>
+  <text x="880" y="192" text-anchor="middle" fill="#94a3b8" font-size="12">default-deny · NetworkPolicy · SG</text>
+  <text x="880" y="212" text-anchor="middle" fill="#94a3b8" font-size="12">TLS everywhere · per-pod identity</text>
+  <rect x="710" y="265" width="340" height="110" rx="12" fill="#1e293b" stroke="#4ade80" stroke-width="2"/>
+  <text x="880" y="293" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="700">🔐 Segment B — Analytics</text>
+  <text x="880" y="317" text-anchor="middle" fill="#94a3b8" font-size="12">default-deny · NetworkPolicy · SG</text>
+  <text x="880" y="337" text-anchor="middle" fill="#94a3b8" font-size="12">read-only data paths</text>
+
+  <!-- blocked lateral movement -->
+  <line x1="880" y1="250" x2="880" y2="265" stroke="url(#deny)" stroke-width="3" stroke-dasharray="8 5"/>
+  <circle cx="880" cy="258" r="12" fill="#7f1d1d"/>
+  <text x="880" y="263" text-anchor="middle" fill="#fecaca" font-size="13" font-weight="800">✕</text>
+  <text x="960" y="262" fill="#f87171" font-size="12.5" font-weight="700">no lateral movement</text>
+
+  <!-- bottom: continuous verification -->
+  <rect x="30" y="400" width="1020" height="180" rx="14" fill="#0b1220" stroke="#334155" stroke-width="1.5"/>
+  <text x="550" y="432" text-anchor="middle" fill="#f8fafc" font-size="18" font-weight="800">🔁 Continuous verification loop</text>
+  <g font-size="13.5" fill="#cbd5e1">
+    <text x="70" y="468">① <tspan font-weight="700" fill="#f8fafc">Authenticate</tspan> — strong identity for users (FIDO2) &amp; workloads (SPIFFE)</text>
+    <text x="70" y="494">② <tspan font-weight="700" fill="#f8fafc">Authorize per request</tspan> — policy engine evaluates identity + device + context, issues short-lived tokens</text>
+    <text x="70" y="520">③ <tspan font-weight="700" fill="#f8fafc">Segment</tspan> — default-deny micro-segments; compromise of one workload ≠ access to others</text>
+    <text x="70" y="546">④ <tspan font-weight="700" fill="#f8fafc">Monitor &amp; respond</tspan> — log everything (CloudTrail, audit logs); anomaly → re-verify or revoke</text>
+  </g>
+  <text x="550" y="610" text-anchor="middle" fill="#64748b" font-size="12.5">Perimeter asks "are you inside?" · Zero Trust asks "who are you, and prove it again."</text>
+</svg>
